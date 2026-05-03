@@ -2,11 +2,14 @@ package com.dsa.tracker.entity;
 
 import java.time.LocalDate;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Problem {
@@ -15,10 +18,15 @@ public class Problem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	long id;
 	
-	String title;
-	String topic;
-	String difficulty;
-	String status;
+    @NotBlank(message = "Title is required")
+
+	private String title;
+	private String topic;
+	
+    @NotBlank(message = "Difficulty is required")
+
+	private String difficulty;
+    private String status;
 	
 	private String platform;
 	
@@ -26,6 +34,25 @@ public class Problem {
 	
 	private String notes;
 	
+	@NotNull(message = "Date is required")
+
+	private LocalDate dateSolved;
+	
+//	 private String username;
+//	    private String password;
+	
+//	public String getUsername() {
+//			return username;
+//		}
+//		public void setUsername(String username) {
+//			this.username = username;
+//		}
+//		public String getPassword() {
+//			return password;
+//		}
+//		public void setPassword(String password) {
+//			this.password = password;
+//		}
 	public String getPlatform() {
 		return platform;
 	}
@@ -44,9 +71,7 @@ public class Problem {
 	public void setDateSolved(LocalDate dateSolved) {
 		this.dateSolved = dateSolved;
 	}
-	private LocalDate dateSolved;
-	
-	
+    
 	
 	public long getId() {
 		return id;

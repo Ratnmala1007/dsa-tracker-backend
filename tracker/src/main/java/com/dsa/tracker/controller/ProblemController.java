@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dsa.tracker.entity.Problem;
 import com.dsa.tracker.service.ProblemService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/problems")
 
@@ -30,9 +32,13 @@ public class ProblemController {
 	@Autowired
 private ProblemService problemService;
 	
+//	@PostMapping
+//	public Problem saveProblem(@RequestBody Problem problem ) {
+//	return problemService.saveProblem(problem);
+//	}
 	@PostMapping
-	public Problem saveProblem(@RequestBody Problem problem ) {
-	return problemService.saveProblem(problem);
+	public ResponseEntity<?> addProblem(@Valid @RequestBody Problem problem) {
+	    return ResponseEntity.ok(problemService.saveProblem(problem));
 	}
 	
 	@GetMapping
