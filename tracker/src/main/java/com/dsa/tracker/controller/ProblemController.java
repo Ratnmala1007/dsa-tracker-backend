@@ -6,7 +6,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dsa.tracker.entity.Problem;
@@ -24,6 +27,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/problems")
+//@CrossOrigin(origins = "http://localhost:5173")
 
 public class ProblemController {
     private static final Logger logger = LoggerFactory.getLogger(ProblemController.class);
@@ -38,6 +42,9 @@ private ProblemService problemService;
 //	}
 	@PostMapping
 	public ResponseEntity<?> addProblem(@Valid @RequestBody Problem problem) {
+		  System.out.println(problem.getTitle());
+		   System.out.println(problem.getDateSolved());
+
 	    return ResponseEntity.ok(problemService.saveProblem(problem));
 	}
 	
@@ -72,7 +79,16 @@ private ProblemService problemService;
 	        @RequestBody Problem problem) {
 	    return ResponseEntity.ok(problemService.updateProblem(id, problem));
 	}
-	
+	@GetMapping("/paged")
+	public ResponseEntity<Page<Problem>> getPagedProblems(
+	        @RequestParam int page,
+	        @RequestParam int size
+	) {
+
+	    return ResponseEntity.ok(
+	            problemService.getPagedProblems(page, size)
+	    );
+	}
 	@PatchMapping("/{id}")
 	public ResponseEntity<Problem> updatePartial(
 	        @PathVariable Long id,

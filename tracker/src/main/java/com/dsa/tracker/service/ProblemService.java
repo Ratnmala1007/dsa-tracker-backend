@@ -7,7 +7,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import com.dsa.tracker.entity.Problem;
 import com.dsa.tracker.repository.ProblemRepository;
@@ -48,6 +52,18 @@ public class ProblemService {
 	public List <Problem> findByPlatform(String platform) {
 		return problemRepository.findByPlatform(platform);
 		
+	}
+	public Page<Problem> getPagedProblems(int page, int size) {
+
+		logger.info("Fetching paginated problems: page={}, size={}", page, size);
+	    Pageable pageable =
+	            PageRequest.of(
+	                    page,
+	                    size,
+	                    Sort.by("id").descending()
+	            );
+
+	    return problemRepository.findAll(pageable);
 	}
 	public Problem updateProblem(Long id, Problem newProblem) {
 	    Problem existing = problemRepository.findById(id)
