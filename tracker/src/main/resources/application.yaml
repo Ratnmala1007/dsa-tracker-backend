@@ -1,12 +1,11 @@
-
 server:
   port: ${PORT:8080}
+
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/dsa_tracker
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://mysql-3a9079f3-dsa-tracker.d.aivencloud.com:17740/defaultdb?useSSL=true&requireSSL=true"
+    username: "avnadmin"
+    password: ${DB_PASSWORD}
 
   jpa:
     hibernate:
