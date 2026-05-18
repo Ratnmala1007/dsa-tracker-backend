@@ -1,6 +1,6 @@
 # DSA Tracker
 
-A full-stack web application to track Data Structures and Algorithms (DSA) problem-solving progress.
+A Backend web application to track Data Structures and Algorithms (DSA) problem-solving progress.
 
 ## 🚀 Features
 
@@ -26,9 +26,6 @@ A full-stack web application to track Data Structures and Algorithms (DSA) probl
 
 ### Database
 - MySQL
-
-### Frontend
-- React 
 
 ---
 
@@ -92,12 +89,6 @@ spring.datasource.password=root
 mvn spring-boot:run
 ```
 
-### Frontend
-
-```bash
-npm install
-npm run dev
-```
 
 ---
 
