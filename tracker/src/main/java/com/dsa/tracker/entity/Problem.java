@@ -28,8 +28,14 @@ public class Problem {
     @NotBlank(message = "Difficulty is required")
 
 	private String difficulty;
+    @NotBlank(message = "Status is required")
+
     private String status;
-	
+    @NotBlank(message = "ProblemLink is required")
+
+    private String problemLink;
+
+
 	private String platform;
 	
 	@Column(length = 1000)
@@ -91,5 +97,11 @@ public class Problem {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getProblemLink() {
+		return problemLink;
+	}
+	public void setProblemLink(String problemLink) {
+		this.problemLink = problemLink;
 	}
 }

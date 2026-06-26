@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dsa.tracker.dto.DashboardResponse;
+import com.dsa.tracker.dto.MonthlyStats;
 import com.dsa.tracker.entity.Problem;
 import com.dsa.tracker.service.ProblemService;
 
@@ -96,5 +98,17 @@ private ProblemService problemService;
         logger.info("PATCH request received for id: {}", id);
 
 	    return ResponseEntity.ok(problemService.updatePartial(id, updates));
+	}
+	
+	@GetMapping("/dashboard")
+	public DashboardResponse dashboard() {
+
+	    return problemService.getDashboardStats();
+	}
+	
+	@GetMapping("/monthly-stats")
+	public List<MonthlyStats> getMonthlyStats() {
+
+	    return problemService.getMonthlyStats();
 	}
 }

@@ -1,8 +1,11 @@
 package com.dsa.tracker.service;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import com.dsa.tracker.dto.DashboardResponse;
+import com.dsa.tracker.dto.MonthlyStats;
 import com.dsa.tracker.entity.Problem;
 import com.dsa.tracker.repository.ProblemRepository;
 
@@ -121,5 +126,51 @@ public class ProblemService {
 
 
 	    return problemRepository.save(problem);
+	    
+	   
 	}
+	 public DashboardResponse getDashboardStats() {
+
+	        long total = problemRepository.count();
+
+	        long easy = problemRepository.countByDifficulty("Easy");
+
+	        long medium = problemRepository.countByDifficulty("Medium");
+
+	        long hard = problemRepository.countByDifficulty("Hard");
+
+	        return new DashboardResponse(
+	                total,
+	                easy,
+	                medium,
+	                hard);
+	    }
+	 
+	
+
+	 public List<MonthlyStats> getMonthlyStats() {
+
+	     List<Problem> problems = problemRepository.findAll();
+
+	     Map<Month, Long> monthlyMap =
+	             problems.stream()
+	                     .collect(Collectors.groupingBy(
+	                             p -> p.getDateSolved().getMonth(),
+	                             Collectors.counting()
+	                     ));
+
+	     List<MonthlyStats> result = new ArrayList<>();
+
+	     for (Map.Entry<Month, Long> entry : monthlyMap.entrySet()) {
+
+	         result.add(
+	                 new MonthlyStats(
+	                         entry.getKey().toString(),
+	                         entry.getValue()
+	                 )
+	         );
+	     }
+
+	     return result;
+	 }
 }
