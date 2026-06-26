@@ -1,31 +1,61 @@
-# DSA Tracker
+📚 DSA Tracker Backend
 
-A Backend web application to track Data Structures and Algorithms (DSA) problem-solving progress.
+A Spring Boot REST API application that helps users track their Data Structures and Algorithms (DSA) problem-solving journey. It allows users to securely manage solved problems, monitor progress, and organize practice efficiently.
 
-## 🚀 Features
+🚀 Features
 
-- Add DSA problems
-- Update problem status
-- Delete solved problems
-- Track difficulty level
-- Store problem links
-- REST API integration
-- MySQL database connectivity
+🔐 Authentication & Security
+User Registration
+User Login
+JWT Authentication
+Spring Security
+Password Encryption (BCrypt)
 
+📋 Problem Management
+Add a new problem
+Get all problems
+Get problem by ID
+Update problem
+Partial update (PATCH)
+Delete problem
+
+🔍 Filtering & Pagination
+Filter problems by difficulty
+Filter problems by platform
+Pagination support
+
+📊 Dashboard & Statistics
+Monthly problem-solving statistics
+Track solved problems
+Track problem difficulty
+Store problem links
+
+⚙️ Other Features
+Global Exception Handling
+Input Validation
+Swagger API Documentation
+SLF4J Logging
+RESTful API Design
 ---
 
-## 🛠️ Technologies Used
+🛠️ Tech Stack
+Backend
+Java 21
+Spring Boot
+Spring Security
+Spring Data JPA
+Hibernate
+Maven
+REST APIs
 
-### Backend
-- Java
-- Spring Boot
-- Spring Data JPA
-- Hibernate
-- REST API
-- Maven
+Database
+MySQL
 
-### Database
-- MySQL
+Tools
+IntelliJ IDEA / Spring Tool Suite (STS)
+Postman
+Swagger UI
+Git & GitHub
 
 ---
 
@@ -35,6 +65,7 @@ tracker
 ├──src
  ├──com.dsa.tracker
  ├── com.dsa.tracker.controller
+ ├── com.dsa.tracker.dto
  ├── com.dsa.tracker.entity
  ├── com.dsa.tracker.exception
  ├── com.dsa.tracker.repository
@@ -58,6 +89,8 @@ tracker
 | GET| /problems/difficulty/{difficulty}|Get        problems by difficulty
 | GET| /problems/platform/{platform}|Get        problems by platform
 |GET |/problems/paged?page=0&size=3|get problems by page number
+|GET/problems/dashboard |problem get by how many solved easy,medium,hard in month
+
 
 
 
@@ -81,23 +114,39 @@ spring.datasource.password=root
 
 ---
 
-## ▶️ Run the Project
+▶️ Running the Application
 
-### Backend
+Clone the repository:
+
+git clone <https://github.com/Ratnmala1007/dsa-tracker-backend.git 
+
+Navigate to the project:
+
+cd tracker
+
+Run the application:
+
+mvn spring-boot:run
 
 ```bash
 mvn spring-boot:run
 ```
 
+📖 API Documentation
+
+After starting the application, open:
+
+<http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## 📸 Project Purpose
+🎯 Project Purpose
 
-This project was created to improve problem-solving consistency and track DSA practice progress efficiently.
-
+This project was developed to strengthen backend development skills using Spring Boot and to provide an efficient way to track DSA problem-solving progress. It demonstrates authentication, authorization, REST API development, pagination, filtering, validation, exception handling, logging, and database integration.
 ---
 
 ## 👩‍💻 Author
 
 Ratnmala Shendge
+Java Full Stack Developer
+<https://github.com/Ratnmala1007
