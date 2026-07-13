@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/dsa_tracker}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://host.docker.internal:3306/dsa_tracker}
     username: ${SPRING_DATASOURCE_USERNAME:root}
     password: ${SPRING_DATASOURCE_PASSWORD:root}
 
